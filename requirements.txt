@@ -1,0 +1,19 @@
+# Programs Needed for Student Grade Prediction
+# Install these with: pip install -r requirements.txt
+
+# For the web service (API)
+fastapi==0.104.1        # Makes the web service
+uvicorn==0.24.0         # Runs the web service
+
+# For working with data
+pandas==1.5.3           # Works with data tables
+numpy==1.24.3           # Does math calculations
+
+# For machine learning
+scikit-learn==1.3.0     # Has all the AI algorithms
+joblib==1.3.0           # Saves and loads trained models
+pydantic==2.4.2         # Checks data is correct
+
+# For making charts
+matplotlib==3.7.2       # Makes basic charts
+seaborn==0.12.2         # Makes prettier charts
