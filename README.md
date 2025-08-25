@@ -1,25 +1,19 @@
-# Student Grade Prediction - Simple Guide
+# Student Grade Prediction - First-Year Student Project
 
-This project helps predict how well students will do in math class. It uses a computer program (AI) to guess student grades.
+This project predicts how well students will do in math class using machine learning. Written in a simple, first-year student style.
 
 ## What Files Do What
 
-- `Assignment.ipynb` - Main notebook that trains the computer to predict grades
-- `app.py` - Web service that needs ALL student information (32 things)
-- `app_simple.py` - Web service that only needs 6 important things (EASIER!)
+- `Assignment.ipynb` - Main notebook that trains 3 different AI models to predict grades
+- `api.py` - Simple web service API to use the trained model 
 - `requirements.txt` - List of programs we need to install
-- `student-mat.csv` - Data about 395 students
+- `student-mat.csv` - Data about 395 students from Portugal
 - `metadata.txt` - Explains what each piece of student information means
+- Model files (created after training): `best_model.joblib`, `scaler.joblib`, `label_encoders.joblib`
 
 ## How to Run Everything
 
-### Step 1: Train the Computer Program
-1. Open `Assignment.ipynb` in VS Code
-2. Run ALL the code cells from top to bottom
-3. This teaches the computer how to predict grades
-4. It will save the best trained model
-
-### Step 2: Set Up Your Computer
+### Step 1: Set Up Your Computer
 ```bash
 # Make a clean workspace
 python -m venv venv
@@ -34,26 +28,26 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 3: Start the Web Service
+### Step 2: Train the AI Models
+1. Open `Assignment.ipynb` in Jupyter Notebook or VS Code
+2. Run ALL the code cells from top to bottom (takes a few minutes)
+3. This trains 3 different models: Decision Tree, KNN, and Random Forest
+4. It automatically picks the best model and saves it as `.joblib` files
 
-**Easy Version (recommended):**
-```bash
-python app_simple.py
-```
 
-**Full Version (harder):**
+
+### Step 3: Start the Web API
 ```bash
-python app.py
+python api.py
 ```
 
 Open your web browser and go to `http://localhost:8000`
 
-**💡 Tip: Use the easy version first!**
 
 ## How to Test It
 
-### Test with Easy Version:
-Send this information to predict a grade:
+### Quick Test Example:
+Send this student information to get a grade prediction:
 ```json
 {
   "G2": 15,
@@ -64,6 +58,7 @@ Send this information to predict a grade:
   "studytime": 3
 }
 ```
+(The API will fill in default values for the other student information)
 
 ### What These Numbers Mean:
 - **G2**: Grade from last test (0-20)
@@ -83,39 +78,26 @@ Send this information to predict a grade:
 
 ## What You Get Back
 
-The computer will tell you:
-- **predicted_grade**: Exact prediction (like 14.2)
+The API returns:
+- **predicted_grade**: Exact prediction (like 14.237)
 - **rounded_grade**: Rounded number (like 14)
-- **confidence_info**: Which model made the prediction
+- **model_used**: Which AI model made the prediction (DecisionTreeRegressor, etc.)
 
-## About the Computer Program
+## About the AI Models
 
-- **Looks at**: Student info like past grades, study time, family background
-- **Predicts**: Final math grade (0-20 scale)
-- **Trained on**: 395 real students from Portugal
+**What the models do:**
+- **Input**: Student info like past grades, study time, family background
+- **Output**: Predicted final math grade (0-20 scale)
+- **Training data**: 395 real students from Portugal
 - **Accuracy**: Usually within 1-2 grade points
 
-## All Student Information Used
+**Three models tested:**
+1. **Decision Tree** - Makes simple yes/no decisions 
+2. **K-Nearest Neighbors (KNN)** - Looks at similar students
+3. **Random Forest** - Combines many decision trees (often the best)
 
-The computer looks at these things about each student:
-- Personal: age, gender, where they live
-- Family: parents' jobs and education
-- School: study time, past grades, absences
-- Social: free time, relationships
-
-See `metadata.txt` for complete list.
-
-## Need Help?
-
-**Common Problems:**
-- **"Model files not found"**: Run the notebook first!
-- **"Import error"**: Make sure venv is active and requirements installed
-- **"Connection error"**: Check if the web service is running
-
-**Testing Steps:**
-1. Train model in notebook ✅
-2. Install requirements ✅
-3. Start web service ✅
-4. Test in browser ✅
-
-That's it! You now have a working grade prediction system.
+**Complete Steps:**
+1. ✅ Run the notebook to train models
+2. ✅ Install requirements in virtual environment  
+3. ✅ Start the API with `python api.py`
+4. ✅ Test at `http://localhost:8000/docs`
